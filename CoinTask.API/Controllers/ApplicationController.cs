@@ -48,9 +48,10 @@ namespace CoinTask.API.Controllers
                     User = user,
                     CoinId = userCoinDto.CoinId
                 };
-
+                //Mark as favorite
                 _applicationRepository.Add(userCoin);
             } else {
+                //Unmark from favorites
                 _applicationRepository.Delete(userCoin);
             }
 
@@ -70,11 +71,9 @@ namespace CoinTask.API.Controllers
             if (coins.Length == 0) 
                 return BadRequest("This user has no favorite coins");
 
-            string url = _configuration.GetSection("AppSettings:CoinCapAPI").Value;
-            url += "?ids=" + coins;
+            string url = _configuration.GetSection("AppSettings:CoinCapAPI").Value + "?ids=" + coins;
             var jsonObject = fetchDataFromCoinApi(url);
             return Ok(jsonObject.Data);
-        
         }
 
         private ResponseDto fetchDataFromCoinApi(string url)

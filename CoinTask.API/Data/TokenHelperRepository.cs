@@ -13,10 +13,8 @@ namespace CoinTask.API.Data
     public class TokenHelperRepository : ITokenHelperRepository
     {
         private readonly IConfiguration _configuration;
-        private readonly DataContext _context;
-        public TokenHelperRepository(IConfiguration configuration, DataContext context)
+        public TokenHelperRepository(IConfiguration configuration)
         {
-            _context = context;
             _configuration = configuration;
         }
         public string GenerateRefreshToken()
